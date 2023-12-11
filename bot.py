@@ -1,16 +1,11 @@
-# Logging module
 import logging
 
-# Aiogram imports
 from aiogram import Bot, Dispatcher, types
 from aiogram.dispatcher.filters import Text
 from aiogram.types import ParseMode, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils import executor
 
-# Local modules to work with Database and Ton network
 import config
 import info
 import db

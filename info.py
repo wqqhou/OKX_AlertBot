@@ -14,11 +14,10 @@ accountAPI = Account.AccountAPI(config.API_KEY, config.API_SECRET_KEY, config.AP
 
 async def start():
 
-    # We need the Bot instance here to send deposit notifications to users
     bot = Bot(token=config.BOT_TOKEN)
 
     while True:
-        # 2 Seconds delay between checks
+        # 60 Seconds delay between checks
         await asyncio.sleep(60)
         resp = accountAPI.get_interest_rate()
         uid_list = db.get_subscribers()
