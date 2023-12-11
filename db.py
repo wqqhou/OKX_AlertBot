@@ -29,7 +29,7 @@ def add_subscriber(syb, uid):
 
 def check_subscriber(syb, uid):
     list = get_subscribers(syb)
-    print(list)
+    uid = str(uid)
     if list:
         if uid in list:
             return True
