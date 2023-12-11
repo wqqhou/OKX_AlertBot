@@ -37,10 +37,11 @@ def check_subscriber(syb, uid):
 
 def remove_subscriber(syb, uid):
     list = get_subscribers(syb)
+    uid = str(uid)
     if list:
         if uid in list:
             list.remove(uid)
-            cur.execute(f'UPDATE Subscription SET uid = {list} WHERE syb = "{syb}"')
+            cur.execute(f'UPDATE Subscription SET uid = "{list}" WHERE syb = "{syb}"')
             con.commit()
             return True
     return False
