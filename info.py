@@ -1,6 +1,6 @@
 # Requests for API, Asyncio to call sleep() in async func
 import asyncio
-import okx.Earning as Earning
+import okx.Account as Account
 
 # Aiogram
 from aiogram import Bot
@@ -18,8 +18,8 @@ async def start():
     while True:
         # 2 Seconds delay between checks
         await asyncio.sleep(20)
-        EarningAPI = Earning.EarningAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
-        resp = EarningAPI.get_offers(protocolType = "staking")
+        accountAPI = Account.AccountAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
+        resp = accountAPI.get_interest_rate(ccy = "TON")
         print(resp)
 
         # Iterating over currencies
