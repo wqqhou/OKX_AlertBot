@@ -22,8 +22,8 @@ def get_subscribers(syb):
 
 def add_subscriber(syb, uid):
     list = get_subscribers(syb)
-    uid = str(uid)
-    list = str(list.append(uid))
+    list.append(str(uid))
+    list = str(list)
     cur.execute(f'UPDATE Subscription SET uid = {list} WHERE syb = {syb}')
     con.commit()
 
