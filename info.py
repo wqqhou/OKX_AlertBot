@@ -24,10 +24,9 @@ async def start():
 
         # Iterating over currencies
         for ccy in resp['data']:
-            apy = ccy['apy']
-            if float(apy) >= 0.3:
-                apy = apy * 100
+            rate = float(ccy['interestRate']) * 876000
+            if float(rate) >= 30:
                 syb = ccy['ccy']
                 uid_list = db.get_subscribers(syb)
                 for uid in uid_list:
-                    await bot.send_message(uid, f'[Rate Alert] {syb}\n\n Estimated rate for the next hour is: {apy}%', parse_mode=ParseMode.MARKDOWN)
+                    await bot.send_message(uid, f'[Rate Alert] {syb}\n\n Estimated rate for the next hour is: {rate}%', parse_mode=ParseMode.MARKDOWN)
