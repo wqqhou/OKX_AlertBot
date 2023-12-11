@@ -41,10 +41,10 @@ async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
     if db.check_subscriber(uid):
-        await message.answer('You are already Subscribe')
+        await message.answer('You are already subscribe.')
     else:
         db.add_subscriber(uid)
-        await message.answer('You are successfully Subscribe')
+        await message.answer('You are successfully subscribed.')
     
 @dp.message_handler(commands='Unsubscribe')
 @dp.message_handler(Text(equals='Unsubscribe', ignore_case=True))
@@ -53,11 +53,11 @@ async def deposit_handler(message: types.Message):
     uid = message.from_user.id
     if db.check_subscriber(uid):
         if db.remove_subscriber(uid):
-            await message.answer('You are successfully Unsubscribe')
+            await message.answer('You are successfully unsubscribed.')
         else:
             await message.answer('Something went wrong')
     else:
-        await message.answer('You are not Subscribe')
+        await message.answer('You are not subscribed.')
 
 if __name__ == '__main__':
     # Create Aiogram executor for our bot
