@@ -19,7 +19,7 @@ async def start():
 
     while True:
         # 2 Seconds delay between checks
-        asyncio.sleep(60)
+        await asyncio.sleep(60)
         resp = accountAPI.get_interest_rate(ccy = "TON")
 
         # Iterating over currencies
