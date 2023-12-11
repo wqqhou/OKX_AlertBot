@@ -10,6 +10,8 @@ from aiogram.types import ParseMode
 import db
 import config
 
+accountAPI = Account.AccountAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
+
 async def start():
 
     # We need the Bot instance here to send deposit notifications to users
@@ -17,10 +19,8 @@ async def start():
 
     while True:
         # 2 Seconds delay between checks
-        await asyncio.sleep(20)
-        accountAPI = Account.AccountAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
+        asyncio.sleep(60)
         resp = accountAPI.get_interest_rate(ccy = "TON")
-        print(resp)
 
         # Iterating over currencies
         for ccy in resp['data']:
