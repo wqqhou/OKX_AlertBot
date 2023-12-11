@@ -12,8 +12,7 @@ from aiogram.utils import executor
 
 # Local modules to work with Database and Ton network
 import config
-import time
-import requests
+import info
 
 # Now all the info about bot work will be printed out to console
 logging.basicConfig(level=logging.INFO)
@@ -31,7 +30,7 @@ if __name__ == '__main__':
     ex = executor.Executor(dp)
 
     # Launch the deposit waiter with our executor
-    ex.loop.create_task(ton.start())
+    ex.loop.create_task(info.start())
 
     # Launch the bot
     ex.start_polling()
