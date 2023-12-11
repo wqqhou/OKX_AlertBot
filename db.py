@@ -1,5 +1,6 @@
 # We will use the SQLite database
 import sqlite3
+import json
 
 # Initialize database connection and cursor
 con = sqlite3.connect('db.sqlite')
@@ -13,15 +14,14 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Subscription(
 
 def get_subscribers(syb):
     cur.execute(f'SELECT * FROM Subscription WHERE syb = "{syb}"')
-    uid_list = cur.fetchone()
+    uid_list = json.loads(cur.fetchone()[1])
     if uid_list:
         return uid_list
     return False
 
 def add_subscriber(syb, uid):
-    list = [get_subscribers(syb)]
-    new_list = list.append(uid)
-    print(syb, new_list)
+    list = get_subscribers(syb)
+    new_list = json.dumps(list.append(uid))
     cur.execute(f'UPDATE Subscription SET uid = {new_list} WHERE syb = {syb}')
     con.commit()
 
