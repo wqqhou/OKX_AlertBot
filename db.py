@@ -15,14 +15,14 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Subscription(
 def get_subscribers(syb):
     cur.execute(f'SELECT * FROM Subscription WHERE syb = "{syb}"')
     data = cur.fetchone()[1]
-    uid_list = json.loads(data)
+    uid_list = eval(data)
     if uid_list:
         return uid_list
     return False
 
 def add_subscriber(syb, uid):
     list = get_subscribers(syb)
-    new_list = json.dumps(list.append(uid))
+    new_list = str(list.append(uid))
     cur.execute(f'UPDATE Subscription SET uid = {new_list} WHERE syb = {syb}')
     con.commit()
 
