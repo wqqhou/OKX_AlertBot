@@ -26,7 +26,7 @@ async def start():
         # Iterating over currencies
         for ccy in resp['data']:
             apy = ccy['apy']
-            if apy >= 0.3:
+            if float(apy) >= 0.3:
                 apy = apy * 100
                 syb = ccy['ccy']
                 uid_list = db.get_subscribers(syb)
