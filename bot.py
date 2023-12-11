@@ -42,7 +42,7 @@ async def deposit_handler(message: types.Message):
     if db.check_subscriber("TONCOIN", uid):
         await message.answer('You are already registered')
     else:
-        if db.add_subscriber('TONCOIN', uid):
+        if db.add_subscriber("TONCOIN", uid):
             await message.answer('You are successfully registered')
         else:
             await message.answer('Something went wrong')
