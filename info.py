@@ -18,7 +18,7 @@ async def start():
     while True:
         # 2 Seconds delay between checks
         await asyncio.sleep(2)
-        EarningAPI = Earning.EarningAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="1")
+        EarningAPI = Earning.EarningAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
         resp = EarningAPI.get_offers(protocolType = 'staking', ccy = 'TONCOIN')
 
         # Iterating over currencies
