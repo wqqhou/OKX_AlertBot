@@ -9,12 +9,12 @@ cur = con.cursor()
 # Create table "Subscription" with uid and balance rows
 cur.execute('''CREATE TABLE IF NOT EXISTS Subscription(
                 syb STRING,
-                uid INTEGER
+                uid STRING
         )''')
 
 def get_subscribers(syb):
     cur.execute(f'SELECT * FROM Subscription WHERE syb = "{syb}"')
-    data = str(cur.fetchone()[1])
+    data = cur.fetchone()[1]
     uid_list = json.loads(data)
     if uid_list:
         return uid_list
