@@ -19,9 +19,9 @@ def get_subscribers(syb):
     return False
 
 def add_subscriber(syb, uid):
-    syb = syb
     list = [get_subscribers(syb)]
     new_list = list.append(uid)
+    cur.execute(f'SELECT * FROM Subscription WHERE syb = "{syb}"')
     cur.execute(f'UPDATE Subscription SET uid = {new_list} WHERE syb = "{syb}"')
     con.commit()
 
