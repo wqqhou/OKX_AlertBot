@@ -14,6 +14,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Subscription(
 def get_subscribers():
     cur.execute(f'SELECT * FROM Subscription')
     data = cur.fetchone()
+    print(data)
     uid_list = eval(data)
     if uid_list:
         return uid_list
