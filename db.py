@@ -12,7 +12,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Subscription(
         )''')
 
 def get_subscribers(syb):
-    cur.execute(f'SELECT * FROM Subscription WHERE syb = {syb}')
+    cur.execute(f'SELECT * FROM Subscription WHERE syb = "{syb}"')
     uid_list = cur.fetchone()
     if uid_list:
         return uid_list
@@ -21,7 +21,7 @@ def get_subscribers(syb):
 def add_subscriber(syb, uid):
     list = get_subscribers(syb)
     new_list = list.append(uid)
-    cur.execute(f'UPDATE Subscription SET uid = {new_list} WHERE syb = {syb}')
+    cur.execute(f'UPDATE Subscription SET uid = {new_list} WHERE syb = "{syb}"')
     con.commit()
 
 def check_subscriber(syb, uid):
@@ -36,7 +36,7 @@ def remove_subscriber(syb, uid):
     if list:
         if uid in list:
             list.remove(uid)
-            cur.execute(f'UPDATE Subscription SET uid = {list} WHERE syb = {syb}')
+            cur.execute(f'UPDATE Subscription SET uid = {list} WHERE syb = "{syb}"')
             con.commit()
             return True
     return False
