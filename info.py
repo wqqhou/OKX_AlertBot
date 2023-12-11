@@ -23,11 +23,11 @@ async def start():
         # 2 Seconds delay between checks
         await asyncio.sleep(2)
 
-        try:
-            now = datetime.now()
-            timestamp = now.strftime("%Y-%m-%dT%H:%M:%SZ")
-            sign = hmac.new(config.API_SECRET_KEY, timestamp + 'GET' + f'/api/v5/finance/staking-defi/offers?protocolType=staking&ccy=TONCOIN', hashlib.sha256 ).encode("ascii") 
-            resp = requests.get(f'{config.API_BASE_URL}/api/v5/finance/staking-defi/offers?'
+
+        now = datetime.now()
+        timestamp = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        sign = hmac.new(config.API_SECRET_KEY, timestamp + 'GET' + f'/api/v5/finance/staking-defi/offers?protocolType=staking&ccy=TONCOIN', hashlib.sha256 ).encode("ascii") 
+        resp = requests.get(f'{config.API_BASE_URL}/api/v5/finance/staking-defi/offers?'
                                 f'protocolType=staking&'
                                 f'ccy=TONCOIN', 
                                 headers={
@@ -36,8 +36,7 @@ async def start():
                                     "OK-ACCESS-TIMESTAMP": f'{timestamp}',
                                     "OK-ACCESS-PASSPHRASE": f"{config.API_PASSPHRASE}"              
                                          }).json()
-        except:
-            continue
+
 
         # Iterating over currencies
         for ccy in resp['data']:
