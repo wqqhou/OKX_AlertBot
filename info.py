@@ -19,8 +19,8 @@ async def start():
         # 2 Seconds delay between checks
         await asyncio.sleep(20)
         EarningAPI = Earning.EarningAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
-        ccy = 'BTC'
-        resp = EarningAPI.get_offers(ccy = ccy)
+        syb = "BTC"
+        resp = EarningAPI.get_offers(ccy = syb)
         print(resp)
 
         # Iterating over currencies
