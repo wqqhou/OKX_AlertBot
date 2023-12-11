@@ -14,7 +14,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Subscription(
 
 def get_subscribers(syb):
     cur.execute(f'SELECT * FROM Subscription WHERE syb = "{syb}"')
-    data = cur.fetchone()[1]
+    data = str(cur.fetchone()[1])
     uid_list = json.loads(data)
     if uid_list:
         return uid_list
