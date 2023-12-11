@@ -2,7 +2,7 @@
 
 DEMO: https://t.me/OKX_AlertBot
 
-Provide your OKX API & Telegram bot credentials. 
+Insert your own OKX API & Telegram bot credentials in the config file. 
 ````
 nano config.py
 ````
