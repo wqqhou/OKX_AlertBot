@@ -1,6 +1,6 @@
 # Requests for API, Asyncio to call sleep() in async func
-import requests
 import asyncio
+import okx.Earning as Earning
 
 # Aiogram
 from aiogram import Bot
@@ -9,10 +9,10 @@ from aiogram.types import ParseMode
 # We also need config here
 import db
 import config
-from datetime import datetime
-import hmac
-import base64 
-import hashlib
+
+api_key = config.API_KEY
+secret_key = config.API_SECRET_KEY
+passphrase = config.API_PASSPHRASE
 
 async def start():
 
@@ -22,21 +22,7 @@ async def start():
     while True:
         # 2 Seconds delay between checks
         await asyncio.sleep(2)
-
-
-        now = datetime.now()
-        timestamp = now.strftime("%Y-%m-%dT%H:%M:%SZ")
-        sign = hmac.new(config.API_SECRET_KEY, timestamp + 'GET' + f'/api/v5/finance/staking-defi/offers?protocolType=staking&ccy=TONCOIN', hashlib.sha256 ).encode("ascii") 
-        resp = requests.get(f'{config.API_BASE_URL}/api/v5/finance/staking-defi/offers?'
-                                f'protocolType=staking&'
-                                f'ccy=TONCOIN', 
-                                headers={
-                                    "OK-ACCESS-KEY": f"{config.API_KEY}",
-                                    "OK-ACCESS-SIGN": f'{sign}',
-                                    "OK-ACCESS-TIMESTAMP": f'{timestamp}',
-                                    "OK-ACCESS-PASSPHRASE": f"{config.API_PASSPHRASE}"              
-                                         }).json()
-
+        resp = Earning.offers(protocolType = 'staking', ccy = 'TONCOIN')
 
         # Iterating over currencies
         for ccy in resp['data']:
