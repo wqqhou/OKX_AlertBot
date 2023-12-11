@@ -42,10 +42,8 @@ async def deposit_handler(message: types.Message):
     if db.check_subscriber("TONCOIN", uid):
         await message.answer('You are already registered')
     else:
-        if db.add_subscriber("TONCOIN", uid):
-            await message.answer('You are successfully registered')
-        else:
-            await message.answer('Something went wrong')
+        db.add_subscriber("TONCOIN", uid):
+        await message.answer('You are successfully registered')
     
 @dp.message_handler(commands='Unregister')
 @dp.message_handler(Text(equals='Unregister', ignore_case=True))
