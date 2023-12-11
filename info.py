@@ -1,5 +1,5 @@
 # Requests for API, Asyncio to call sleep() in async func
-import asyncio
+import time
 import okx.Account as Account
 
 # Aiogram
@@ -19,7 +19,7 @@ async def start():
 
     while True:
         # 2 Seconds delay between checks
-        asyncio.sleep(60)
+        time.sleep(60)
         resp = accountAPI.get_interest_rate(ccy = "TON")
 
         # Iterating over currencies
