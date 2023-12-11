@@ -31,7 +31,7 @@ async def welcome_handler(message: types.Message):
 
 
     # Send welcome text and include the keyboard
-    await message.answer('We are currently monitoring every margin-trading eligible coin listed on OKX. The infomarion will be updated once a minute.',
+    await message.answer('We are currently monitoring every margin-trading eligible coin listed on OKX. The infomarion will be updated once a minute. Type or click on subscribe to start receiving our messages.',
                          reply_markup=keyboard,
                          parse_mode=ParseMode.MARKDOWN)
     
