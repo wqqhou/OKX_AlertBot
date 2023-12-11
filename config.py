@@ -1,0 +1,7 @@
+BOT_TOKEN = ''
+
+API_BASE_URL = ''
+
+API_KEY = ''
+API_SECRET_KEY = ''
+API_PASSPHRASE = ''
