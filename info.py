@@ -30,6 +30,6 @@ async def start():
                 uid_list = db.get_subscribers(syb)
                 for uid in uid_list:
                     try:
-                       await bot.send_message(uid, f'[Rate Alert] {syb}\n\n Estimated rate for the next hour is: {rate}%', parse_mode=ParseMode.MARKDOWN)
+                       await bot.send_message(uid, f'[Rate Alert] {syb}\n\n Current borrowing rate is: {rate}%', parse_mode=ParseMode.MARKDOWN)
                     except:
                         pass
