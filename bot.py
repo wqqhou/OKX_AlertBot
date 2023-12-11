@@ -27,37 +27,37 @@ dp = Dispatcher(bot, storage=storage)
 async def welcome_handler(message: types.Message):
     # Function that sends the welcome message with main keyboard to user
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.row(KeyboardButton('Register'), KeyboardButton('Unregister'))
+    keyboard.row(KeyboardButton('Subscribe'), KeyboardButton('Unsubscribe'))
 
 
     # Send welcome text and include the keyboard
-    await message.answer('Current watch list: TON',
+    await message.answer('We are currently monitoring every margin-trading eligible coin listed on OKX. The infomarion will be updated once a minute.',
                          reply_markup=keyboard,
                          parse_mode=ParseMode.MARKDOWN)
     
-@dp.message_handler(commands='Register')
-@dp.message_handler(Text(equals='Register', ignore_case=True))
+@dp.message_handler(commands='Subscribe')
+@dp.message_handler(Text(equals='Subscribe', ignore_case=True))
 async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
     if db.check_subscriber(uid):
-        await message.answer('You are already registered')
+        await message.answer('You are already Subscribe')
     else:
         db.add_subscriber(uid)
-        await message.answer('You are successfully registered')
+        await message.answer('You are successfully Subscribe')
     
-@dp.message_handler(commands='Unregister')
-@dp.message_handler(Text(equals='Unregister', ignore_case=True))
+@dp.message_handler(commands='Unsubscribe')
+@dp.message_handler(Text(equals='Unsubscribe', ignore_case=True))
 async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
     if db.check_subscriber(uid):
         if db.remove_subscriber(uid):
-            await message.answer('You are successfully unregistered')
+            await message.answer('You are successfully Unsubscribe')
         else:
             await message.answer('Something went wrong')
     else:
-        await message.answer('You are not registered')
+        await message.answer('You are not Subscribe')
 
 if __name__ == '__main__':
     # Create Aiogram executor for our bot
