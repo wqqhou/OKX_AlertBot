@@ -22,7 +22,7 @@ async def start():
     while True:
         # 2 Seconds delay between checks
         await asyncio.sleep(2)
-        resp = Earning.offers(protocolType = 'staking', ccy = 'TONCOIN')
+        resp = Earning.get_offers(protocolType = 'staking', ccy = 'TONCOIN')
 
         # Iterating over currencies
         for ccy in resp['data']:
