@@ -8,13 +8,12 @@ cur = con.cursor()
 
 # Create table "Subscription" with uid and balance rows
 cur.execute('''CREATE TABLE IF NOT EXISTS Subscription(
-                syb STRING,
                 uid STRING
         )''')
 
 def get_subscribers(syb):
-    cur.execute(f'SELECT * FROM Subscription WHERE syb = "{syb}"')
-    data = cur.fetchone()[1]
+    cur.execute(f'SELECT * FROM Subscription')
+    data = cur.fetchone()
     uid_list = eval(data)
     if uid_list:
         return uid_list
@@ -24,7 +23,7 @@ def add_subscriber(syb, uid):
     list = get_subscribers(syb)
     list.append(str(uid))
     list = str(list)
-    cur.execute(f'UPDATE Subscription SET uid = "{list}" WHERE syb = "{syb}"')
+    cur.execute(f'UPDATE Subscription SET uid = "{list}"')
     con.commit()
 
 def check_subscriber(syb, uid):

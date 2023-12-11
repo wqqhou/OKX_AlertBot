@@ -29,6 +29,7 @@ async def welcome_handler(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.row(KeyboardButton('Register'), KeyboardButton('Unregister'))
 
+
     # Send welcome text and include the keyboard
     await message.answer('Current watch list: TON',
                          reply_markup=keyboard,
@@ -39,10 +40,10 @@ async def welcome_handler(message: types.Message):
 async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
-    if db.check_subscriber("TON", uid):
+    if db.check_subscriber(uid):
         await message.answer('You are already registered')
     else:
-        db.add_subscriber("TON", uid)
+        db.add_subscriber(uid)
         await message.answer('You are successfully registered')
     
 @dp.message_handler(commands='Unregister')
@@ -50,8 +51,8 @@ async def deposit_handler(message: types.Message):
 async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
-    if db.check_subscriber("TON", uid):
-        if db.remove_subscriber("TON", uid):
+    if db.check_subscriber(uid):
+        if db.remove_subscriber(uid):
             await message.answer('You are successfully unregistered')
         else:
             await message.answer('Something went wrong')

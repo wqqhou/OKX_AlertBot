@@ -20,16 +20,16 @@ async def start():
     while True:
         # 2 Seconds delay between checks
         await asyncio.sleep(60)
-        resp = accountAPI.get_interest_rate(ccy = "TON")
+        resp = accountAPI.get_interest_rate()
+        uid_list = db.get_subscribers()
 
         # Iterating over currencies
         for ccy in resp['data']:
             rate = float(ccy['interestRate']) * 876000
-            if float(rate) >= 30:
-                syb = ccy['ccy']
-                uid_list = db.get_subscribers(syb)
+            if float(rate) >= 25:
+                syb = ccy['ccy']         
                 for uid in uid_list:
                     try:
-                       await bot.send_message(uid, f'[Rate Alert] {syb}\n\n Current borrowing rate is: {rate}%', parse_mode=ParseMode.MARKDOWN)
+                       await bot.send_message(uid, f'[Rate Alert] {syb}\n\n Current borrowing rate is: {rate}%')
                     except:
                         pass
