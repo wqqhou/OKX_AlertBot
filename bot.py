@@ -39,10 +39,10 @@ async def welcome_handler(message: types.Message):
 async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
-    if db.check_subscriber(uid):
+    if db.check_subscriber("TONCOIN", uid):
         await message.answer('You are already registered')
     else:
-        if db.add_subscriber(uid, 'TONCOIN'):
+        if db.add_subscriber('TONCOIN', uid):
             await message.answer('You are successfully registered')
         else:
             await message.answer('Something went wrong')
@@ -52,8 +52,8 @@ async def deposit_handler(message: types.Message):
 async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
-    if db.check_subscriber(uid):
-        if db.remove_subscriber(uid):
+    if db.check_subscriber("TONCOIN", uid):
+        if db.remove_subscriber("TONCOIN", uid):
             await message.answer('You are successfully unregistered')
         else:
             await message.answer('Something went wrong')
