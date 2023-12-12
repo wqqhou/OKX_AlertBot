@@ -24,14 +24,17 @@ async def start():
             uid_list = db.get_subscribers()
         except:
             continue
+        msg = '[Rate Alert]'
 
         # Iterating over currencies
         for ccy in resp['data']:
             rate = float(ccy['interestRate']) * 876000
             if float(rate) >= 25:
                 syb = ccy['ccy']         
-                for uid in uid_list:
-                    try:
-                       await bot.send_message(uid, f'[Rate Alert] {syb}\n\n Current borrowing rate is: {rate}%')
-                    except:
-                        pass
+                msg = msg + f'\n\n{syb}: Current borrowing rate is {rate}%'           
+                
+        for uid in uid_list:
+                try:
+                   await bot.send_message(uid, msg)
+                except:
+                    pass
