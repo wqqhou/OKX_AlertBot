@@ -1,6 +1,5 @@
 # We will use the SQLite database
 import sqlite3
-import json
 
 # Initialize database connection and cursor
 con = sqlite3.connect('db.sqlite')

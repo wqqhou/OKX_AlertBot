@@ -24,7 +24,6 @@ async def welcome_handler(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.row(KeyboardButton('Subscribe'), KeyboardButton('Unsubscribe'))
 
-
     # Send welcome text and include the keyboard
     await message.answer('We are currently monitoring every margin-trading eligible coin listed on OKX. The infomation will be updated once every 5 minutes. Type or click on subscribe to start receiving our messages.',
                          reply_markup=keyboard,
