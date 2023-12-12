@@ -19,8 +19,11 @@ async def start():
     while True:
         # 60 Seconds delay between checks
         await asyncio.sleep(60)
-        resp = accountAPI.get_interest_rate()
-        uid_list = db.get_subscribers()
+        try:
+            resp = accountAPI.get_interest_rate()
+            uid_list = db.get_subscribers()
+        except:
+            continue
 
         # Iterating over currencies
         for ccy in resp['data']:

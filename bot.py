@@ -36,7 +36,7 @@ async def deposit_handler(message: types.Message):
 
     uid = message.from_user.id
     if db.check_subscriber(uid):
-        await message.answer('You are already subscribe.')
+        await message.answer('You are already subscribed.')
     else:
         db.add_subscriber(uid)
         await message.answer('You are successfully subscribed.')
