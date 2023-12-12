@@ -18,7 +18,7 @@ async def start():
 
     while True:
         # 60 Seconds delay between checks
-        await asyncio.sleep(60)
+        await asyncio.sleep(300)
         try:
             resp = accountAPI.get_interest_rate()
             uid_list = db.get_subscribers()
