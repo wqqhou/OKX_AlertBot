@@ -34,6 +34,7 @@ async def start():
                 msg = msg + f'\n\n{syb}: Current borrowing rate is {rate}%'           
                 
         for uid in uid_list:
+            if syb:
                 try:
                    await bot.send_message(uid, msg)
                 except:
