@@ -21,23 +21,27 @@ async def start():
 
     while True:
         # 60 Seconds delay between checks
-        await asyncio.sleep(3)
         start = timer()
-        try:
-            resp_i = accountAPI.get_interest_rate()
-            resp_f = publicAPI.get_funding_rate()
-            uid_list = db.get_subscribers()
-        except:
-            continue
+
         alert = False
         msg = '[Rate Alert]'
-
         info: dict = {}
+
+        try:
+            resp_f = publicAPI.get_funding_rate()
+        except:
+            continue
 
         for inst in resp_f['data']:
             rate = float(inst['nextFundingRate']) * 100
             syb = inst['instrumentId'].split('-')[0]
             info[syb]: list = rate
+
+        try:
+            resp_i = accountAPI.get_interest_rate()
+            uid_list = db.get_subscribers()
+        except:
+            continue
 
         for ccy in resp_i['data']:
             rate = float(ccy['interestRate']) * 876000
