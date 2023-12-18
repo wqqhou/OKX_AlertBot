@@ -35,6 +35,9 @@ async def start():
         except:
             continue
 
+        if resp_f['code'] != '0':
+            continue
+
         for ccy in resp_i['data']:
             i_rate = float(ccy['interestRate']) * 876000
 
