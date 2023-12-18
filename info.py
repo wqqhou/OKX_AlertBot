@@ -30,7 +30,7 @@ async def start():
             resp_f = publicAPI.get_funding_rate()
         except:
             continue
-
+        print(resp_f)
         for inst in resp_f['data']:
             rate = float(inst['nextFundingRate']) * 100
             syb = inst['instrumentId'].split('-')[0]
