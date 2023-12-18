@@ -41,7 +41,7 @@ async def start():
 
                 alert = True
                 syb = ccy['ccy']
-                inst = syb + '-USD-SWAP'
+                inst = syb + '-USDT-SWAP'
                 tik = syb + '-USDT'
 
                 try:
