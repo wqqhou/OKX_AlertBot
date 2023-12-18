@@ -37,13 +37,14 @@ async def start():
 
         for ccy in resp_i['data']:
             i_rate = float(ccy['interestRate']) * 876000
-            if i_rate > 25:
 
+            if i_rate > 25:
+                
                 alert = True
                 syb = ccy['ccy']
                 inst = syb + '-USDT-SWAP'
                 tik = syb + '-USDT'
-                
+
                 #try:
                 resp_f = publicAPI.get_funding_rate(instId=inst)
                 f_rate = float(resp_f['data'][0]['nextFundingRate']) * 100
