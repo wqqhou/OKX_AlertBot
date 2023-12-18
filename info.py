@@ -1,10 +1,10 @@
 # Requests for API, Asyncio to call sleep() in async func
 import asyncio
 import okx.Account as Account
+from timeit import default_timer as timer
 
 # Aiogram
 from aiogram import Bot
-from aiogram.types import ParseMode
 
 # We also need config here
 import db
@@ -18,7 +18,7 @@ async def start():
 
     while True:
         # 60 Seconds delay between checks
-        await asyncio.sleep(300)
+        start = timer()
         try:
             resp = accountAPI.get_interest_rate()
             uid_list = db.get_subscribers()
@@ -41,3 +41,5 @@ async def start():
                    await bot.send_message(uid, msg)
                 except:
                     pass
+        end = timer()
+        await asyncio.sleep(300 - (end - start))
