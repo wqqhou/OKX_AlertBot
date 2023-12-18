@@ -46,7 +46,8 @@ async def start():
 
                 #try:
                 resp_f = publicAPI.get_funding_rate(instId=inst)
-                f_rate = float(resp_f['data']['nextFundingRate']) * 100   
+                f_rate = resp_f['data']['nextFundingRate']
+                f_rate = float(f_rate) * 100
 
                 resp_p = marketDataAPI.get_index_tickers(instId=tik)
                 price = resp_p['data']['idxPx']
