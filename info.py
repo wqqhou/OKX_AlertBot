@@ -2,6 +2,7 @@
 import asyncio
 import okx.Account as Account
 import okx.PublicData as Public
+import okx.MarketData as MarketData
 from timeit import default_timer as timer
 
 # Aiogram
@@ -13,6 +14,8 @@ import config
 
 accountAPI = Account.AccountAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
 publicAPI = Public.PublicAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
+marketDataAPI =  MarketData.MarketAPI(config.API_KEY, config.API_SECRET_KEY, config.API_PASSPHRASE, False, flag="0")
+
 
 
 async def start():
@@ -21,20 +24,10 @@ async def start():
 
     while True:
         # 60 Seconds delay between checks
-        #start = timer()
+        start = timer()
+
         alert = False
         msg = '[Rate Alert]'
-        info: dict = {}
-
-        try:
-            resp_f = publicAPI.get_funding_rate()
-        except:
-            continue
-        print(resp_f)
-        for inst in resp_f['data']:
-            rate = float(inst['nextFundingRate']) * 100
-            syb = inst['instrumentId'].split('-')[0]
-            info[syb]: list = rate
 
         try:
             resp_i = accountAPI.get_interest_rate()
@@ -43,14 +36,25 @@ async def start():
             continue
 
         for ccy in resp_i['data']:
-            rate = float(ccy['interestRate']) * 876000
-            syb = ccy['ccy']         
-            info[syb].append(rate)
+            i_rate = float(ccy['interestRate']) * 876000
+            if i_rate > 25:
 
-        for syb in info:
-            if info[syb][0] > 0.04 or info[syb][1] > 25:
                 alert = True
-                msg += f'\n\n{syb} Interest Rate: {info[syb][1]} Funding Rate: {info[syb][0]}%'
+                syb = ccy['ccy']
+                inst = syb + '-USD-SWAP'
+                tik = syb + '-USDT'
+
+                try:
+                    resp_f = publicAPI.get_funding_rate(instId=inst)
+                    f_rate = float(resp_f['data']['nextFundingRate']) * 100   
+
+                    resp_p = marketDataAPI.get_ticker(instId=tik)
+                    price = resp_p['data']['idxPx']
+
+                    msg += f'\n\n{syb}: Interest Rate is {i_rate}% Funding Rate is {f_rate}% Price is ${price}'
+
+                except:
+                    msg += f'\n\n{syb}: Interest Rate is {i_rate}%'
 
         if alert:        
             for uid in uid_list:
@@ -59,6 +63,6 @@ async def start():
                 except:
                     pass
 
-        #end = timer()
+        end = timer()
 
-        #await asyncio.sleep(300 - (end - start))
+        await asyncio.sleep(300 - (end - start))
