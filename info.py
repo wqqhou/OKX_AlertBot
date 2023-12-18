@@ -35,7 +35,7 @@ async def start():
         except:
             continue
 
-        if resp_f['code'] != '0':
+        if not resp_f or resp_f['code'] != '0':
             continue
 
         for ccy in resp_i['data']:
