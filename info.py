@@ -47,7 +47,7 @@ async def start():
 
                 try:
                     resp_f = publicAPI.get_funding_rate(instId=inst)
-                    f_rate = float(resp_f['data'][0]['nextFundingRate']) * 100
+                    f_rate = float(resp_f['data'][0]['FundingRate']) * 100
                     
                     resp_p = marketDataAPI.get_index_tickers(instId=tik)
                     price = resp_p['data'][0]['idxPx']
@@ -55,7 +55,7 @@ async def start():
                     msg += f'\n\n{syb}:\nInterest Rate is {i_rate}%\nFunding Rate is {f_rate}%\nPrice is ${price}'
 
                 except:
-                    msg += f'\n\n{syb}: Interest Rate is {i_rate}%'
+                    msg += f'\n\n{syb}: \nInterest Rate is {i_rate}%'
 
         if alert:        
             for uid in uid_list:
