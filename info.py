@@ -50,7 +50,7 @@ async def start():
                 f_rate = float(f_rate) * 100
 
                 resp_p = marketDataAPI.get_index_tickers(instId=tik)
-                price = resp_p['data']['idxPx']
+                price = 'idxPx' in resp_p['data']
 
                 msg += f'\n\n{syb}: Interest Rate is {i_rate}% Funding Rate is {f_rate}% Price is ${price}'
 
