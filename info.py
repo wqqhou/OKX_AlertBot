@@ -21,8 +21,7 @@ async def start():
 
     while True:
         # 60 Seconds delay between checks
-        start = timer()
-
+        #start = timer()
         alert = False
         msg = '[Rate Alert]'
         info: dict = {}
@@ -60,6 +59,6 @@ async def start():
                 except:
                     pass
 
-        end = timer()
+        #end = timer()
 
-        await asyncio.sleep(300 - (end - start))
+        #await asyncio.sleep(300 - (end - start))
