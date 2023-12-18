@@ -39,23 +39,23 @@ async def start():
             i_rate = float(ccy['interestRate']) * 876000
 
             if i_rate > 25:
-                
+
                 alert = True
                 syb = ccy['ccy']
                 inst = syb + '-USDT-SWAP'
                 tik = syb + '-USDT'
 
-                #try:
-                resp_f = publicAPI.get_funding_rate(instId=inst)
-                f_rate = float(resp_f['data'][0]['nextFundingRate']) * 100
+                try:
+                    resp_f = publicAPI.get_funding_rate(instId=inst)
+                    f_rate = float(resp_f['data'][0]['nextFundingRate']) * 100
+                    
+                    resp_p = marketDataAPI.get_index_tickers(instId=tik)
+                    price = resp_p['data'][0]['idxPx']
 
-                resp_p = marketDataAPI.get_index_tickers(instId=tik)
-                price = resp_p['data'][0]['idxPx']
+                    msg += f'\n\n{syb}:\nInterest Rate is {i_rate}%\nFunding Rate is {f_rate}%\nPrice is ${price}'
 
-                msg += f'\n\n{syb}: Interest Rate is {i_rate}% Funding Rate is {f_rate}% Price is ${price}'
-
-                #except:
-                    #msg += f'\n\n{syb}: Interest Rate is {i_rate}%'
+                except:
+                    msg += f'\n\n{syb}: Interest Rate is {i_rate}%'
 
         if alert:        
             for uid in uid_list:
