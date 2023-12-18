@@ -48,7 +48,7 @@ async def start():
                     resp_f = publicAPI.get_funding_rate(instId=inst)
                     f_rate = float(resp_f['data']['nextFundingRate']) * 100   
 
-                    resp_p = marketDataAPI.get_ticker(instId=tik)
+                    resp_p = marketDataAPI.get_index_ticker(instId=tik)
                     price = resp_p['data']['idxPx']
 
                     msg += f'\n\n{syb}: Interest Rate is {i_rate}% Funding Rate is {f_rate}% Price is ${price}'
