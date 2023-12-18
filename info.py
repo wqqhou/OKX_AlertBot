@@ -43,14 +43,13 @@ async def start():
                 syb = ccy['ccy']
                 inst = syb + '-USDT-SWAP'
                 tik = syb + '-USDT'
-
+                
                 #try:
                 resp_f = publicAPI.get_funding_rate(instId=inst)
-                f_rate = 'nextFundingRate' in resp_f['data']
-                f_rate = float(f_rate) * 100
+                f_rate = float(resp_f['data'][0]['nextFundingRate']) * 100
 
                 resp_p = marketDataAPI.get_index_tickers(instId=tik)
-                price = 'idxPx' in resp_p['data']
+                price = resp_p['data'][0]['idxPx']
 
                 msg += f'\n\n{syb}: Interest Rate is {i_rate}% Funding Rate is {f_rate}% Price is ${price}'
 
